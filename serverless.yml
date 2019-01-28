@@ -1,0 +1,14 @@
+service: reddit-aws-xpost-bot
+
+custom:
+  secrets: ${file(secrets.json)}
+
+provider:
+  name: aws
+  runtime: nodejs8.10
+
+
+functions:
+  hello:
+    handler: handler.hello
+

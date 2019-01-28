@@ -1,0 +1,10 @@
+{
+  "name": "reddit-aws-xpost-bot",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "dependencies": {
+    "axios": "^0.18.0",
+    "snoowrap": "^1.15.2"
+  }
+}

@@ -1,4 +1,4 @@
-service: reddit-aws-xpost-bot
+service: reddit-aws-xpost-bot-asmr
 
 custom: 
   secrets: ${file(secrets.yml)}
@@ -6,7 +6,6 @@ custom:
 provider:
   name: aws
   runtime: nodejs8.10
-  region: us-east-2
   environment:
     CLIENT_ID: ${self:custom.secrets.CLIENT_ID}
     CLIENT_SECRET: ${self:custom.secrets.CLIENT_SECRET}
@@ -17,8 +16,7 @@ provider:
     FILTER_FLAIR: ${self:custom.secrets.FILTER_FLAIR}
 
 functions:
-  hello:
+  bot:
     handler: handler.botRun
     events:
-      -schedule: 
-        rate: cron(/5 * * * * *)
+      - schedule: cron(0 0/6 * * ? *)

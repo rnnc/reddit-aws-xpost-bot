@@ -34,10 +34,10 @@ const sr = new snoowrap({
 module.exports.getRawData = async () => {
 
   let data;
-  try { data = await sr.getSubreddit(MAIN_SUBREDDIT).getTop('day') }
+  try { data = await sr.getSubreddit(process.env.MAIN_SUBREDDIT).getTop('day') }
   catch (e) { throw `Failed to get initial data from reddit\n${e}` }
 
-  return filterSubmissionsFlair(data, FILTER_FLAIR);
+  return filterSubmissionsFlair(data, process.env.FILTER_FLAIR);
 }
 
 module.exports.submitXpost = async (post) => {

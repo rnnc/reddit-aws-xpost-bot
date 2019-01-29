@@ -1,18 +1,20 @@
 service: reddit-aws-xpost-bot
 
-custom: ${file(secrets.yml)}
+custom: 
+  secrets: ${file(secrets.yml)}
 
 provider:
   name: aws
   runtime: nodejs8.10
+  region: us-east-2
   environment:
-    CLIENT_ID: ${self:custom.CLIENT_ID}
-    CLIENT_SECRET: ${self:custom.CLIENT_SECRET}
-    REDDIT_USER: ${self:custom.REDDIT_USER}
-    REDDIT_PASS: ${self:custom.REDDIT_PASS}
-    MAIN_SUBREDDIT: ${self:custom.MAIN_SUBREDDIT}
-    XPOST_SUBREDDIT: ${self:custom.XPOST_SUBREDDIT}
-    FILTER_FLAIR: ${self:custom.FILTER_FLAIR}
+    CLIENT_ID: ${self:custom.secrets.CLIENT_ID}
+    CLIENT_SECRET: ${self:custom.secrets.CLIENT_SECRET}
+    REDDIT_USER: ${self:custom.secrets.REDDIT_USER}
+    REDDIT_PASS: ${self:custom.secrets.REDDIT_PASS}
+    MAIN_SUBREDDIT: ${self:custom.secrets.MAIN_SUBREDDIT}
+    XPOST_SUBREDDIT: ${self:custom.secrets.XPOST_SUBREDDIT}
+    FILTER_FLAIR: ${self:custom.secrets.FILTER_FLAIR}
 
 functions:
   hello:
@@ -20,4 +22,3 @@ functions:
     events:
       -schedule: 
         rate: cron(/5 * * * * *)
-        

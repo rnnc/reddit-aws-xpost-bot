@@ -6,3 +6,8 @@ legacy_code
 
 # Serverless directories
 .serverless
+
+test.json
+test.js
+
+secrets.json

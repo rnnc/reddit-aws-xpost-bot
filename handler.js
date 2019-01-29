@@ -1,14 +1,20 @@
 'use strict';
 
-module.exports.hello = async (event, context) => {
-  return {
-    statusCode: 200,
-    body: JSON.stringify({
-      message: 'Go Serverless v1.0! Your function executed successfully!',
-      input: event,
-    }),
-  };
+const { getRawData, submitXpost } = require('./bot');
 
-  // Use this code if you don't use the http event with the LAMBDA-PROXY integration
-  // return { message: 'Go Serverless v1.0! Your function executed successfully!', event };
+module.exports.botRun = async () => {
+
+  try {
+
+    const rData = await getRawData();
+
+    if (Array.isArray(rData) && rData.length > 0) {
+      for (const post of rData) {
+        try {
+          const posted = await submitXpost(post)
+        } catch (e) { console.log(`Failed to post\n${JSON.stringify(post, null, 2)}`) }
+      }
+    } else console.log('Ran at schedule :: No UASMR posts');
+
+  } catch (error) { console.log(error) }
 };

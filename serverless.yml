@@ -1,14 +1,23 @@
 service: reddit-aws-xpost-bot
 
-custom:
-  secrets: ${file(secrets.json)}
+custom: ${file(secrets.yml)}
 
 provider:
   name: aws
   runtime: nodejs8.10
-
+  environment:
+    CLIENT_ID: ${self:custom.CLIENT_ID}
+    CLIENT_SECRET: ${self:custom.CLIENT_SECRET}
+    REDDIT_USER: ${self:custom.REDDIT_USER}
+    REDDIT_PASS: ${self:custom.REDDIT_PASS}
+    MAIN_SUBREDDIT: ${self:custom.MAIN_SUBREDDIT}
+    XPOST_SUBREDDIT: ${self:custom.XPOST_SUBREDDIT}
+    FILTER_FLAIR: ${self:custom.FILTER_FLAIR}
 
 functions:
   hello:
-    handler: handler.hello
-
+    handler: handler.botRun
+    events:
+      -schedule: 
+        rate: cron(/5 * * * * *)
+        

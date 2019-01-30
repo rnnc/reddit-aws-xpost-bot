@@ -19,4 +19,4 @@ functions:
   bot:
     handler: handler.botRun
     events:
-      - schedule: cron(0 0/3 * * ? *)
+      - schedule: cron(0 0/2 * * ? *)
